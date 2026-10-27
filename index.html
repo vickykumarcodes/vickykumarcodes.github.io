@@ -1,0 +1,301 @@
+<!doctype html>
+<!-- Vicky site v2: all files in one folder, no media subfolder -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Vicky: IIT Madras BS Data Science student building toward quantitative finance. Projects, reading and 3D animation.">
+<style>
+:root{color-scheme:light;box-sizing:border-box}
+body{margin:0}
+img,video{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Vicky</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&family=Young+Serif&display=swap">
+<style>
+/* Layout: a reading column with a narrow margin rail on the left, like marginalia beside a book page. The rail carries section names; it collapses above the text on phones. */
+:root {
+  --bg: #F2F4F3;
+  --surface: #E8ECEB;
+  --fg: #141B1C;
+  --muted: #566361;
+  --rule: #CBD3D1;
+  --accent: #8E2B35;
+  --display: "Young Serif", Georgia, "Times New Roman", serif;
+  --body: "Literata", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101417; --surface: #171D20; --fg: #E6E9E8; --muted: #9AA5A3; --rule: #2A3235; --accent: #E4868B;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101417; --surface: #171D20; --fg: #E6E9E8; --muted: #9AA5A3; --rule: #2A3235; --accent: #E4868B;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  padding-block: 3rem 4rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.page { max-width: 62rem; margin: 0 auto; }
+a { color: var(--accent); text-underline-offset: 0.2em; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; line-height: 1.15; }
+p { margin: 0; }
+.label { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+/* hero */
+.hero { padding-bottom: 2.5rem; border-bottom: 1px solid var(--rule); }
+.hero h1 { font-size: clamp(3.5rem, 12vw, 7rem); letter-spacing: -0.02em; line-height: 1; }
+.hero .thesis { max-width: 36rem; margin-top: 1.5rem; font-size: 1.25rem; line-height: 1.5; }
+.now { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+.now div { min-width: 0; display: flex; flex-direction: column; gap: 0.35rem; border-top: 2px solid var(--accent); padding-top: 0.75rem; }
+.now p { font-size: 0.98rem; line-height: 1.5; }
+
+.hero-top { display: grid; grid-template-columns: minmax(0, 1fr) 15rem; gap: 2.5rem; align-items: end; }
+.intro { min-width: 0; }
+.portrait { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 50%; background: var(--surface); }
+
+/* sections */
+.sec { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 2rem; padding-block: 2.75rem; border-bottom: 1px solid var(--rule); }
+.sec > .label { padding-top: 0.5rem; }
+.sec h2 { font-size: 1.9rem; margin-bottom: 1.25rem; max-width: 30rem; }
+.body { min-width: 0; }
+.body > p { max-width: 40rem; }
+.body > p + p { margin-top: 1rem; }
+
+/* projects */
+.projects { list-style: none; margin: 0; padding: 0; }
+.projects li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.25rem 1.5rem; padding-block: 1.1rem; border-top: 1px solid var(--rule); }
+.projects li:last-child { border-bottom: 1px solid var(--rule); }
+.projects h3 { font-size: 1.2rem; }
+.projects p { grid-column: 1; max-width: 38rem; font-size: 0.98rem; color: var(--muted); }
+.projects .tags { grid-column: 1; font-family: var(--mono); font-size: 0.75rem; color: var(--muted); }
+.status { grid-column: 2; grid-row: 1; align-self: start; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.2rem 0.55rem; border: 1px solid var(--rule); border-radius: 2px; white-space: nowrap; }
+.status.live { color: var(--accent); border-color: var(--accent); }
+
+/* path */
+.path { list-style: none; margin: 0; padding: 0; position: relative; }
+.path li { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 1rem; padding-bottom: 1.5rem; }
+.path li:last-child { padding-bottom: 0; }
+.path .yr { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); padding-top: 0.15rem; }
+.path strong { font-weight: 500; display: block; }
+.path span { color: var(--muted); font-size: 0.98rem; }
+
+/* reading */
+.shelf { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 2rem; margin-top: 2rem; }
+.shelf > div { min-width: 0; }
+.shelf h3 { font-size: 1.05rem; margin: 0.4rem 0 0.6rem; }
+.shelf ul { margin: 0; padding: 0; list-style: none; font-size: 0.98rem; }
+.shelf li + li { margin-top: 0.3rem; }
+.shelf em { color: var(--muted); }
+.aside { margin-top: 2rem; padding: 1.25rem 1.5rem; background: var(--surface); max-width: 40rem; font-size: 0.98rem; }
+.aside p + p { margin-top: 0.75rem; }
+
+/* making */
+.reel { margin: 2rem 0 0; max-width: 44rem; }
+.reel video, .reel img { display: block; width: 100%; height: auto; background: var(--surface); }
+.reel figcaption { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 0.6rem; }
+.reel + .reel { margin-top: 2.25rem; }
+
+.projects figure.reel { grid-column: 1 / -1; margin-top: 0.9rem; max-width: 40rem; }
+.projects figure.shot { max-width: 20rem; }
+.projects figure.shot img { border-radius: 6px; }
+
+/* contact */
+.links { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+.links li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 1rem; }
+.links .label { min-width: 5.5rem; }
+.links a, .links .addr { font-family: var(--mono); font-size: 0.95rem; overflow-wrap: anywhere; }
+.copy { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); background: none; border: 1px solid var(--accent); border-radius: 2px; padding: 0.2rem 0.6rem; cursor: pointer; }
+.copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+footer { padding-top: 1.5rem; }
+
+@media (max-width: 44rem) {
+  .hero-top { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
+  .portrait { max-width: 11rem; }
+  .sec { grid-template-columns: minmax(0, 1fr); gap: 0.5rem; padding-block: 2.25rem; }
+  .sec > .label { padding-top: 0; }
+  .path li { grid-template-columns: 4.25rem minmax(0, 1fr); }
+  .projects li { grid-template-columns: minmax(0, 1fr); }
+  .status { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 0.4rem; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="hero">
+    <div class="hero-top">
+    <div class="intro">
+    <p class="label">Personal site</p>
+    <h1>Vicky</h1>
+    <p class="thesis">Second-year student in the IIT Madras BS in Data Science, building toward quantitative finance. I make local AI tools, work through statistics, and read the long, difficult books.</p>
+    </div>
+    <img class="portrait" src="portrait.jpg" width="720" height="720" alt="Vicky, wearing a navy polo shirt with the Indian Institute of Technology emblem, arms crossed">
+    </div>
+    <div class="now">
+      <div>
+        <span class="label">Building</span>
+        <p>A local AI desktop automation system that learns from how I use my computer.</p>
+      </div>
+      <div>
+        <span class="label">Studying</span>
+        <p>Statistics and Python at IIT Madras, plus the first research papers on time series forecasting.</p>
+      </div>
+      <div>
+        <span class="label">Reading</span>
+        <p><em>The Brothers Karamazov</em> next to Myers' <em>Psychology</em>, one book checking the other.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="sec" id="work">
+    <span class="label">Work</span>
+    <div class="body">
+      <h2>Things I have built, and what I am building</h2>
+      <ul class="projects">
+        <li>
+          <h3>Thought-Action System</h3>
+          <span class="status live">In progress</span>
+          <p>A local AI pipeline that controls the desktop using Ollama, PyAutoGUI and Python. Month 1 of a 12-week plan is done. Month 2 adds background logging of my own usage, pattern detection with scikit-learn, and a live suggestion layer. Voice and gesture control come in Month 3.</p>
+          <span class="tags">Python · Ollama · PyAutoGUI · scikit-learn · <a href="https://github.com/vickykumarcodes/thought-action-system" target="_blank" rel="noopener noreferrer">Code on GitHub</a></span>
+          <figure class="reel">
+            <video src="thought-action-demo.mp4" poster="thought-action-poster.jpg" width="1280" height="720" controls playsinline preload="metadata" aria-label="Screen recording of the Thought-Action System turning typed plain-English commands into actions on a laptop"></video>
+            <figcaption class="label"><span>Demo</span><span>Typed commands become actions: search YouTube, open Notepad</span></figcaption>
+          </figure>
+        </li>
+        <li>
+          <h3>PDF to EPUB converter</h3>
+          <span class="status">Shipped</span>
+          <p>Turns textbook PDFs into EPUB files with a working table of contents, so they are readable on a Kindle.</p>
+          <span class="tags">Python</span>
+        </li>
+        <li>
+          <h3>Personal library scanner</h3>
+          <span class="status">Deployed</span>
+          <p>A web app for cataloguing the books I own, deployed on Streamlit Cloud.</p>
+          <span class="tags">Streamlit</span>
+          <figure class="reel shot">
+            <img src="scanner.png" width="760" height="830" loading="lazy" alt="The library scanner after photographing a book's back cover: it found Eleven Minutes by Paulo Coelho, with publisher, year and ISBN, and offers to save it to the library">
+            <figcaption class="label"><span>Back cover in, book details out</span></figcaption>
+          </figure>
+        </li>
+        <li>
+          <h3>Coursework in statistics</h3>
+          <span class="status">Done</span>
+          <p>A Monte Carlo simulation assignment, and a Statistics 2 activity built on historical NIFTY 50 data and embedded in a Google Site.</p>
+          <span class="tags">Python · NIFTY 50 data</span>
+        </li>
+        <li>
+          <h3>Time series forecasting study</h3>
+          <span class="status">Planned 2027</span>
+          <p>A research internship project comparing machine learning models against statistical baselines for forecasting. I chose it because it points straight at quantitative finance.</p>
+          <span class="tags">Time series · ML vs statistics</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="reading">
+    <span class="label">Reading</span>
+    <div class="body">
+      <h2>I read the hard version of a subject</h2>
+      <p>Most popular books on a topic are a diluted copy of a deeper, more rigorous book. So I go to the novels, philosophy and textbooks the popular ones are drawn from, and I read two at once when they speak to each other.</p>
+      <div class="shelf">
+        <div>
+          <span class="label">Literature and philosophy</span>
+          <h3>Fiction that argues</h3>
+          <ul>
+            <li>Dostoevsky, <em>The Brothers Karamazov</em> (reading now)</li>
+            <li>Nietzsche</li>
+            <li>The Stoics</li>
+            <li>Machiavelli, and other short classics from Mortimer Adler's list</li>
+          </ul>
+        </div>
+        <div>
+          <span class="label">Mind</span>
+          <h3>Psychology as a textbook</h3>
+          <ul>
+            <li>Myers, DeWall and Gruber, <em>Psychology</em>, 14th edition (reading now)</li>
+            <li>Harari, <em>Homo Deus</em> (to summarise on video)</li>
+          </ul>
+        </div>
+        <div>
+          <span class="label">Money and economy</span>
+          <h3>Reference library</h3>
+          <ul>
+            <li>Indian Economy</li>
+            <li>Personal Finance</li>
+            <li>A growing set of academic PDFs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="aside">
+        <p>Reading Dostoevsky and a psychology textbook together is on purpose. Karamazov gives the human case, and Myers gives the research that tests it. I note where they agree and where the novel sees further.</p>
+        <p>Short notes on each book go here as I finish it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="making">
+    <span class="label">Making</span>
+    <div class="body">
+      <h2>3D Animation/Video Editing</h2>
+      <p>I create 3D Ads and animation for fun.
+         I edit videos in DaVinci Resolve and plan to record short book summaries for YouTube and Instagram, each built on a three-point outline. For the psychology textbook the plan is about one reel per ten pages, with five or six reels combined into a longer video.</p>
+      <figure class="reel">
+        <video id="bottles-clip" src="bottles.mp4" poster="bottles-poster.jpg" width="1280" height="694" autoplay muted loop playsinline controls preload="metadata" aria-label="Animated 3D product shot of three water bottles in different colours, each marked vicky"></video>
+        <figcaption class="label"><span>3D product animation</span><span>Three bottle colourways</span></figcaption>
+      </figure>
+      <figure class="reel">
+        <img src="cube.jpg" width="1400" height="1332" loading="lazy" alt="A photorealistic 3D render of a scrambled Rubik's Cube on a glossy wooden table in a bright room">
+        <figcaption class="label"><span>3D render</span><span>Glossy table, reflections, depth of field</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec contact" id="contact">
+    <span class="label">Find me</span>
+    <div class="body">
+      <h2>Get in touch</h2>
+      <ul class="links">
+        <li><span class="label">GitHub</span><a href="https://github.com/vickykumarcodes" target="_blank" rel="noopener noreferrer">github.com/vickykumarcodes</a></li>
+        <li><span class="label">LinkedIn</span><a href="https://www.linkedin.com/in/vicky-kumar-502830384/" target="_blank" rel="noopener noreferrer">linkedin.com/in/vicky-kumar-502830384</a></li>
+        <li><span class="label">Email</span><span class="addr" id="email-addr">vickykumar250805@gmail.com</span><button class="copy" id="copy-email" type="button">Copy</button></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="label">Vicky · India</footer>
+</div>
+<script>
+  var clip = document.getElementById("bottles-clip");
+  if (clip && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { clip.removeAttribute("autoplay"); clip.pause(); }
+  var copyBtn = document.getElementById("copy-email");
+  var addr = document.getElementById("email-addr");
+  if (copyBtn && addr) {
+    copyBtn.addEventListener("click", function () {
+      var done = function () { copyBtn.textContent = "Copied"; setTimeout(function () { copyBtn.textContent = "Copy"; }, 1800); };
+      var select = function () {
+        var r = document.createRange(); r.selectNodeContents(addr);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        copyBtn.textContent = "Selected";
+      };
+      try {
+        navigator.clipboard.writeText(addr.textContent).then(done, select);
+      } catch (e) { select(); }
+    });
+  }
+</script>
+</body>
+</html>
